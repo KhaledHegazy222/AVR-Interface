@@ -2,6 +2,17 @@
 
 #ifndef LCD_CONFIG_H
     #define LCD_CONFIG_H
+    
+
+
+
+    /* 
+        Options :
+            1- LCD_u8_4_BIT_MODE
+            2- LCD_u8_4_BIT_MODE
+    */
+    #define LCD_u8_DATA_LENGTH LCD_u8_4_BIT_MODE
+
     /*
         PORTS : 
             1- DIO_u8_PORTA
@@ -19,17 +30,13 @@
             7- DIO_PIN_6
             8- DIO_PIN_7
     */
-
-
-    
+   
     #define LCD_DATA_PORT       DIO_u8_PORTA
     #define LCD_CONTROL_PORT    DIO_u8_PORTB
 
     #define LCD_RS_PIN          DIO_PIN_0
     #define LCD_ENABLE_PIN      DIO_PIN_1
 
-    //#define LCD_u8_PIN_MODE     LCD_u8_4BIT_MODE
-    //#define LCD_u8_PIN_MODE     LCD_u8_8BIT_MODE
 
     
     static u8 LCD_u8_Chars[] = {

@@ -15,6 +15,7 @@
 int main(void){
 
 	LCD_voidInit();
+
 	LCD_voidAddCharacter();
 	LCD_voidSendData(4);
 	LCD_voidSendData(3);
@@ -24,6 +25,7 @@ int main(void){
 	LCD_voidSendData(2);
 	LCD_voidSendData(1);
 	LCD_voidSendData(0);
+
 
 	while(1){
 
