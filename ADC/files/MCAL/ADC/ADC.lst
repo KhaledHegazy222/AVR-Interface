@@ -1,0 +1,162 @@
+   1               		.file	"ADC.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	ADC_voidInit
+  18               	ADC_voidInit:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 80E4      		ldi r24,lo8(64)
+  25 0002 87B9      		out 39-32,r24
+  26               	.LM3:
+  27 0004 87E0      		ldi r24,lo8(7)
+  28 0006 86B9      		out 38-32,r24
+  29               	/* epilogue start */
+  30               	.LM4:
+  31 0008 0895      		ret
+  32               	.LFE2:
+  34               	.global	ADC_voidEnable
+  36               	ADC_voidEnable:
+  37               	.LFB3:
+  38               	.LM5:
+  39               	/* prologue: function */
+  40               	/* frame size = 0 */
+  41               	.LM6:
+  42 000a 379A      		sbi 38-32,7
+  43               	/* epilogue start */
+  44               	.LM7:
+  45 000c 0895      		ret
+  46               	.LFE3:
+  48               	.global	ADC_voidDisable
+  50               	ADC_voidDisable:
+  51               	.LFB4:
+  52               	.LM8:
+  53               	/* prologue: function */
+  54               	/* frame size = 0 */
+  55               	.LM9:
+  56 000e 3798      		cbi 38-32,7
+  57               	/* epilogue start */
+  58               	.LM10:
+  59 0010 0895      		ret
+  60               	.LFE4:
+  62               	.global	ADC_u16GetValue
+  64               	ADC_u16GetValue:
+  65               	.LFB5:
+  66               	.LM11:
+  67               	.LVL0:
+  68               	/* prologue: function */
+  69               	/* frame size = 0 */
+  70               	.LM12:
+  71 0012 3B98      		cbi 39-32,3
+  72               	.LM13:
+  73 0014 3C98      		cbi 39-32,4
+  74               	.LM14:
+  75 0016 8330      		cpi r24,lo8(3)
+  76 0018 01F0      		breq .L12
+  77 001a 8430      		cpi r24,lo8(4)
+  78 001c 00F4      		brsh .L17
+  79 001e 8130      		cpi r24,lo8(1)
+  80 0020 01F0      		breq .L10
+  81 0022 8230      		cpi r24,lo8(2)
+  82 0024 00F4      		brsh .L11
+  83 0026 00C0      		rjmp .L28
+  84               	.L17:
+  85 0028 8530      		cpi r24,lo8(5)
+  86 002a 01F0      		breq .L14
+  87 002c 8530      		cpi r24,lo8(5)
+  88 002e 00F0      		brlo .L13
+  89 0030 8630      		cpi r24,lo8(6)
+  90 0032 01F0      		breq .L15
+  91 0034 8730      		cpi r24,lo8(7)
+  92 0036 01F4      		brne .L8
+  93 0038 00C0      		rjmp .L29
+  94               	.L28:
+  95               	.LM15:
+  96 003a 3898      		cbi 39-32,0
+  97 003c 00C0      		rjmp .L22
+  98               	.L10:
+  99               	.LM16:
+ 100 003e 389A      		sbi 39-32,0
+ 101               	.L22:
+ 102               	.LM17:
+ 103 0040 3998      		cbi 39-32,1
+ 104               	.L25:
+ 105               	.LM18:
+ 106 0042 3A98      		cbi 39-32,2
+ 107 0044 00C0      		rjmp .L8
+ 108               	.L11:
+ 109               	.LM19:
+ 110 0046 3898      		cbi 39-32,0
+ 111 0048 00C0      		rjmp .L26
+ 112               	.L12:
+ 113               	.LM20:
+ 114 004a 389A      		sbi 39-32,0
+ 115               	.L26:
+ 116               	.LM21:
+ 117 004c 399A      		sbi 39-32,1
+ 118 004e 00C0      		rjmp .L25
+ 119               	.L13:
+ 120               	.LM22:
+ 121 0050 3898      		cbi 39-32,0
+ 122 0052 00C0      		rjmp .L27
+ 123               	.L14:
+ 124               	.LM23:
+ 125 0054 389A      		sbi 39-32,0
+ 126               	.L27:
+ 127               	.LM24:
+ 128 0056 3998      		cbi 39-32,1
+ 129 0058 00C0      		rjmp .L24
+ 130               	.L15:
+ 131               	.LM25:
+ 132 005a 3898      		cbi 39-32,0
+ 133 005c 00C0      		rjmp .L23
+ 134               	.L29:
+ 135               	.LM26:
+ 136 005e 389A      		sbi 39-32,0
+ 137               	.L23:
+ 138               	.LM27:
+ 139 0060 399A      		sbi 39-32,1
+ 140               	.L24:
+ 141               	.LM28:
+ 142 0062 3A9A      		sbi 39-32,2
+ 143               	.L8:
+ 144               	.LM29:
+ 145 0064 369A      		sbi 38-32,6
+ 146               	.L18:
+ 147               	.LM30:
+ 148 0066 349B      		sbis 38-32,4
+ 149 0068 00C0      		rjmp .L18
+ 150               	.LM31:
+ 151 006a 349A      		sbi 38-32,4
+ 152               	.LM32:
+ 153 006c 24B1      		in r18,36-32
+ 154 006e 35B1      		in r19,(36)+1-32
+ 155               	.LVL1:
+ 156               	.LM33:
+ 157 0070 C901      		movw r24,r18
+ 158               	.LVL2:
+ 159               	/* epilogue start */
+ 160 0072 0895      		ret
+ 161               	.LFE5:
+ 211               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADC.c
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:2      *ABS*:0000003f __SREG__
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:5      *ABS*:00000034 __CCP__
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:18     .text:00000000 ADC_voidInit
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:36     .text:0000000a ADC_voidEnable
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:50     .text:0000000e ADC_voidDisable
+C:\Users\Upgrade\AppData\Local\Temp/ccGuyIst.s:64     .text:00000012 ADC_u16GetValue
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,654 @@
+   1               		.file	"DIO.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	DIO_voidSetPortDirection
+  18               	DIO_voidSetPortDirection:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LM2:
+  25 0000 8130      		cpi r24,lo8(1)
+  26 0002 01F0      		breq .L4
+  27 0004 8130      		cpi r24,lo8(1)
+  28 0006 00F0      		brlo .L3
+  29 0008 8230      		cpi r24,lo8(2)
+  30 000a 01F0      		breq .L5
+  31 000c 8330      		cpi r24,lo8(3)
+  32 000e 01F4      		brne .L7
+  33 0010 00C0      		rjmp .L8
+  34               	.L3:
+  35               	.LM3:
+  36 0012 6ABB      		out 58-32,r22
+  37 0014 0895      		ret
+  38               	.L4:
+  39               	.LM4:
+  40 0016 67BB      		out 55-32,r22
+  41 0018 0895      		ret
+  42               	.L5:
+  43               	.LM5:
+  44 001a 64BB      		out 52-32,r22
+  45 001c 0895      		ret
+  46               	.L8:
+  47               	.LM6:
+  48 001e 61BB      		out 49-32,r22
+  49               	.L7:
+  50 0020 0895      		ret
+  51               	.LFE2:
+  53               	.global	DIO_voidSetPinDirection
+  55               	DIO_voidSetPinDirection:
+  56               	.LFB3:
+  57               	.LM7:
+  58               	.LVL1:
+  59               	/* prologue: function */
+  60               	/* frame size = 0 */
+  61               	.LM8:
+  62 0022 8130      		cpi r24,lo8(1)
+  63 0024 01F0      		breq .L12
+  64 0026 8130      		cpi r24,lo8(1)
+  65 0028 00F0      		brlo .L11
+  66 002a 8230      		cpi r24,lo8(2)
+  67 002c 01F0      		breq .L13
+  68 002e 8330      		cpi r24,lo8(3)
+  69 0030 01F0      		breq .+2
+  70 0032 00C0      		rjmp .L19
+  71 0034 00C0      		rjmp .L23
+  72               	.L11:
+  73               	.LM9:
+  74 0036 4423      		tst r20
+  75 0038 01F0      		breq .L15
+  76 003a 2AB3      		in r18,58-32
+  77 003c 81E0      		ldi r24,lo8(1)
+  78 003e 90E0      		ldi r25,hi8(1)
+  79               	.LVL2:
+  80 0040 00C0      		rjmp 2f
+  81 0042 880F      	1:	lsl r24
+  82 0044 991F      		rol r25
+  83 0046 6A95      	2:	dec r22
+  84 0048 02F4      		brpl 1b
+  85 004a 282B      		or r18,r24
+  86 004c 2ABB      		out 58-32,r18
+  87 004e 00C0      		rjmp .L21
+  88               	.LVL3:
+  89               	.L15:
+  90 0050 2AB3      		in r18,58-32
+  91 0052 81E0      		ldi r24,lo8(1)
+  92 0054 90E0      		ldi r25,hi8(1)
+  93               	.LVL4:
+  94 0056 00C0      		rjmp 2f
+  95 0058 880F      	1:	lsl r24
+  96 005a 991F      		rol r25
+  97 005c 6A95      	2:	dec r22
+  98 005e 02F4      		brpl 1b
+  99 0060 8095      		com r24
+ 100 0062 8223      		and r24,r18
+ 101 0064 8ABB      		out 58-32,r24
+ 102               	.L21:
+ 103 0066 8AB3      		in r24,58-32
+ 104 0068 0895      		ret
+ 105               	.LVL5:
+ 106               	.L12:
+ 107               	.LM10:
+ 108 006a 4423      		tst r20
+ 109 006c 01F0      		breq .L16
+ 110 006e 27B3      		in r18,55-32
+ 111 0070 81E0      		ldi r24,lo8(1)
+ 112 0072 90E0      		ldi r25,hi8(1)
+ 113               	.LVL6:
+ 114 0074 00C0      		rjmp 2f
+ 115 0076 880F      	1:	lsl r24
+ 116 0078 991F      		rol r25
+ 117 007a 6A95      	2:	dec r22
+ 118 007c 02F4      		brpl 1b
+ 119 007e 282B      		or r18,r24
+ 120 0080 27BB      		out 55-32,r18
+ 121 0082 00C0      		rjmp .L22
+ 122               	.LVL7:
+ 123               	.L16:
+ 124 0084 27B3      		in r18,55-32
+ 125 0086 81E0      		ldi r24,lo8(1)
+ 126 0088 90E0      		ldi r25,hi8(1)
+ 127               	.LVL8:
+ 128 008a 00C0      		rjmp 2f
+ 129 008c 880F      	1:	lsl r24
+ 130 008e 991F      		rol r25
+ 131 0090 6A95      	2:	dec r22
+ 132 0092 02F4      		brpl 1b
+ 133 0094 8095      		com r24
+ 134 0096 8223      		and r24,r18
+ 135 0098 87BB      		out 55-32,r24
+ 136               	.L22:
+ 137 009a 87B3      		in r24,55-32
+ 138 009c 0895      		ret
+ 139               	.LVL9:
+ 140               	.L13:
+ 141               	.LM11:
+ 142 009e 4423      		tst r20
+ 143 00a0 01F0      		breq .L17
+ 144 00a2 24B3      		in r18,52-32
+ 145 00a4 81E0      		ldi r24,lo8(1)
+ 146 00a6 90E0      		ldi r25,hi8(1)
+ 147               	.LVL10:
+ 148 00a8 00C0      		rjmp 2f
+ 149 00aa 880F      	1:	lsl r24
+ 150 00ac 991F      		rol r25
+ 151 00ae 6A95      	2:	dec r22
+ 152 00b0 02F4      		brpl 1b
+ 153 00b2 282B      		or r18,r24
+ 154 00b4 24BB      		out 52-32,r18
+ 155 00b6 00C0      		rjmp .L20
+ 156               	.LVL11:
+ 157               	.L17:
+ 158 00b8 24B3      		in r18,52-32
+ 159 00ba 81E0      		ldi r24,lo8(1)
+ 160 00bc 90E0      		ldi r25,hi8(1)
+ 161               	.LVL12:
+ 162 00be 00C0      		rjmp 2f
+ 163 00c0 880F      	1:	lsl r24
+ 164 00c2 991F      		rol r25
+ 165 00c4 6A95      	2:	dec r22
+ 166 00c6 02F4      		brpl 1b
+ 167 00c8 8095      		com r24
+ 168 00ca 8223      		and r24,r18
+ 169 00cc 84BB      		out 52-32,r24
+ 170               	.L20:
+ 171 00ce 84B3      		in r24,52-32
+ 172 00d0 0895      		ret
+ 173               	.LVL13:
+ 174               	.L23:
+ 175               	.LM12:
+ 176 00d2 4423      		tst r20
+ 177 00d4 01F0      		breq .L18
+ 178 00d6 21B3      		in r18,49-32
+ 179 00d8 81E0      		ldi r24,lo8(1)
+ 180 00da 90E0      		ldi r25,hi8(1)
+ 181               	.LVL14:
+ 182 00dc 00C0      		rjmp 2f
+ 183 00de 880F      	1:	lsl r24
+ 184 00e0 991F      		rol r25
+ 185 00e2 6A95      	2:	dec r22
+ 186 00e4 02F4      		brpl 1b
+ 187 00e6 282B      		or r18,r24
+ 188 00e8 21BB      		out 49-32,r18
+ 189 00ea 81B3      		in r24,49-32
+ 190 00ec 0895      		ret
+ 191               	.LVL15:
+ 192               	.L18:
+ 193 00ee 21B3      		in r18,49-32
+ 194 00f0 81E0      		ldi r24,lo8(1)
+ 195 00f2 90E0      		ldi r25,hi8(1)
+ 196               	.LVL16:
+ 197 00f4 00C0      		rjmp 2f
+ 198 00f6 880F      	1:	lsl r24
+ 199 00f8 991F      		rol r25
+ 200 00fa 6A95      	2:	dec r22
+ 201 00fc 02F4      		brpl 1b
+ 202 00fe 8095      		com r24
+ 203 0100 8223      		and r24,r18
+ 204 0102 81BB      		out 49-32,r24
+ 205 0104 81B3      		in r24,49-32
+ 206               	.LVL17:
+ 207               	.L19:
+ 208 0106 0895      		ret
+ 209               	.LFE3:
+ 211               	.global	DIO_voidSetPortValue
+ 213               	DIO_voidSetPortValue:
+ 214               	.LFB4:
+ 215               	.LM13:
+ 216               	.LVL18:
+ 217               	/* prologue: function */
+ 218               	/* frame size = 0 */
+ 219               	.LM14:
+ 220 0108 8130      		cpi r24,lo8(1)
+ 221 010a 01F0      		breq .L27
+ 222 010c 8130      		cpi r24,lo8(1)
+ 223 010e 00F0      		brlo .L26
+ 224 0110 8230      		cpi r24,lo8(2)
+ 225 0112 01F0      		breq .L28
+ 226 0114 8330      		cpi r24,lo8(3)
+ 227 0116 01F4      		brne .L30
+ 228 0118 00C0      		rjmp .L31
+ 229               	.L26:
+ 230               	.LM15:
+ 231 011a 6BBB      		out 59-32,r22
+ 232 011c 0895      		ret
+ 233               	.L27:
+ 234               	.LM16:
+ 235 011e 68BB      		out 56-32,r22
+ 236 0120 0895      		ret
+ 237               	.L28:
+ 238               	.LM17:
+ 239 0122 65BB      		out 53-32,r22
+ 240 0124 0895      		ret
+ 241               	.L31:
+ 242               	.LM18:
+ 243 0126 62BB      		out 50-32,r22
+ 244               	.L30:
+ 245 0128 0895      		ret
+ 246               	.LFE4:
+ 248               	.global	DIO_voidSetPinValue
+ 250               	DIO_voidSetPinValue:
+ 251               	.LFB5:
+ 252               	.LM19:
+ 253               	.LVL19:
+ 254               	/* prologue: function */
+ 255               	/* frame size = 0 */
+ 256               	.LM20:
+ 257 012a 8130      		cpi r24,lo8(1)
+ 258 012c 01F0      		breq .L35
+ 259 012e 8130      		cpi r24,lo8(1)
+ 260 0130 00F0      		brlo .L34
+ 261 0132 8230      		cpi r24,lo8(2)
+ 262 0134 01F0      		breq .L36
+ 263 0136 8330      		cpi r24,lo8(3)
+ 264 0138 01F0      		breq .+2
+ 265 013a 00C0      		rjmp .L42
+ 266 013c 00C0      		rjmp .L46
+ 267               	.L34:
+ 268               	.LM21:
+ 269 013e 4423      		tst r20
+ 270 0140 01F0      		breq .L38
+ 271 0142 2BB3      		in r18,59-32
+ 272 0144 81E0      		ldi r24,lo8(1)
+ 273 0146 90E0      		ldi r25,hi8(1)
+ 274               	.LVL20:
+ 275 0148 00C0      		rjmp 2f
+ 276 014a 880F      	1:	lsl r24
+ 277 014c 991F      		rol r25
+ 278 014e 6A95      	2:	dec r22
+ 279 0150 02F4      		brpl 1b
+ 280 0152 282B      		or r18,r24
+ 281 0154 2BBB      		out 59-32,r18
+ 282 0156 00C0      		rjmp .L44
+ 283               	.LVL21:
+ 284               	.L38:
+ 285 0158 2BB3      		in r18,59-32
+ 286 015a 81E0      		ldi r24,lo8(1)
+ 287 015c 90E0      		ldi r25,hi8(1)
+ 288               	.LVL22:
+ 289 015e 00C0      		rjmp 2f
+ 290 0160 880F      	1:	lsl r24
+ 291 0162 991F      		rol r25
+ 292 0164 6A95      	2:	dec r22
+ 293 0166 02F4      		brpl 1b
+ 294 0168 8095      		com r24
+ 295 016a 8223      		and r24,r18
+ 296 016c 8BBB      		out 59-32,r24
+ 297               	.L44:
+ 298 016e 8BB3      		in r24,59-32
+ 299 0170 0895      		ret
+ 300               	.LVL23:
+ 301               	.L35:
+ 302               	.LM22:
+ 303 0172 4423      		tst r20
+ 304 0174 01F0      		breq .L39
+ 305 0176 28B3      		in r18,56-32
+ 306 0178 81E0      		ldi r24,lo8(1)
+ 307 017a 90E0      		ldi r25,hi8(1)
+ 308               	.LVL24:
+ 309 017c 00C0      		rjmp 2f
+ 310 017e 880F      	1:	lsl r24
+ 311 0180 991F      		rol r25
+ 312 0182 6A95      	2:	dec r22
+ 313 0184 02F4      		brpl 1b
+ 314 0186 282B      		or r18,r24
+ 315 0188 28BB      		out 56-32,r18
+ 316 018a 00C0      		rjmp .L45
+ 317               	.LVL25:
+ 318               	.L39:
+ 319 018c 28B3      		in r18,56-32
+ 320 018e 81E0      		ldi r24,lo8(1)
+ 321 0190 90E0      		ldi r25,hi8(1)
+ 322               	.LVL26:
+ 323 0192 00C0      		rjmp 2f
+ 324 0194 880F      	1:	lsl r24
+ 325 0196 991F      		rol r25
+ 326 0198 6A95      	2:	dec r22
+ 327 019a 02F4      		brpl 1b
+ 328 019c 8095      		com r24
+ 329 019e 8223      		and r24,r18
+ 330 01a0 88BB      		out 56-32,r24
+ 331               	.L45:
+ 332 01a2 88B3      		in r24,56-32
+ 333 01a4 0895      		ret
+ 334               	.LVL27:
+ 335               	.L36:
+ 336               	.LM23:
+ 337 01a6 4423      		tst r20
+ 338 01a8 01F0      		breq .L40
+ 339 01aa 25B3      		in r18,53-32
+ 340 01ac 81E0      		ldi r24,lo8(1)
+ 341 01ae 90E0      		ldi r25,hi8(1)
+ 342               	.LVL28:
+ 343 01b0 00C0      		rjmp 2f
+ 344 01b2 880F      	1:	lsl r24
+ 345 01b4 991F      		rol r25
+ 346 01b6 6A95      	2:	dec r22
+ 347 01b8 02F4      		brpl 1b
+ 348 01ba 282B      		or r18,r24
+ 349 01bc 25BB      		out 53-32,r18
+ 350 01be 00C0      		rjmp .L43
+ 351               	.LVL29:
+ 352               	.L40:
+ 353 01c0 25B3      		in r18,53-32
+ 354 01c2 81E0      		ldi r24,lo8(1)
+ 355 01c4 90E0      		ldi r25,hi8(1)
+ 356               	.LVL30:
+ 357 01c6 00C0      		rjmp 2f
+ 358 01c8 880F      	1:	lsl r24
+ 359 01ca 991F      		rol r25
+ 360 01cc 6A95      	2:	dec r22
+ 361 01ce 02F4      		brpl 1b
+ 362 01d0 8095      		com r24
+ 363 01d2 8223      		and r24,r18
+ 364 01d4 85BB      		out 53-32,r24
+ 365               	.L43:
+ 366 01d6 85B3      		in r24,53-32
+ 367 01d8 0895      		ret
+ 368               	.LVL31:
+ 369               	.L46:
+ 370               	.LM24:
+ 371 01da 4423      		tst r20
+ 372 01dc 01F0      		breq .L41
+ 373 01de 22B3      		in r18,50-32
+ 374 01e0 81E0      		ldi r24,lo8(1)
+ 375 01e2 90E0      		ldi r25,hi8(1)
+ 376               	.LVL32:
+ 377 01e4 00C0      		rjmp 2f
+ 378 01e6 880F      	1:	lsl r24
+ 379 01e8 991F      		rol r25
+ 380 01ea 6A95      	2:	dec r22
+ 381 01ec 02F4      		brpl 1b
+ 382 01ee 282B      		or r18,r24
+ 383 01f0 22BB      		out 50-32,r18
+ 384 01f2 82B3      		in r24,50-32
+ 385 01f4 0895      		ret
+ 386               	.LVL33:
+ 387               	.L41:
+ 388 01f6 22B3      		in r18,50-32
+ 389 01f8 81E0      		ldi r24,lo8(1)
+ 390 01fa 90E0      		ldi r25,hi8(1)
+ 391               	.LVL34:
+ 392 01fc 00C0      		rjmp 2f
+ 393 01fe 880F      	1:	lsl r24
+ 394 0200 991F      		rol r25
+ 395 0202 6A95      	2:	dec r22
+ 396 0204 02F4      		brpl 1b
+ 397 0206 8095      		com r24
+ 398 0208 8223      		and r24,r18
+ 399 020a 82BB      		out 50-32,r24
+ 400 020c 82B3      		in r24,50-32
+ 401               	.LVL35:
+ 402               	.L42:
+ 403 020e 0895      		ret
+ 404               	.LFE5:
+ 406               	.global	DIO_u8ReadPinValue
+ 408               	DIO_u8ReadPinValue:
+ 409               	.LFB6:
+ 410               	.LM25:
+ 411               	.LVL36:
+ 412               	/* prologue: function */
+ 413               	/* frame size = 0 */
+ 414               	.LM26:
+ 415 0210 8130      		cpi r24,lo8(1)
+ 416 0212 01F0      		breq .L50
+ 417 0214 8130      		cpi r24,lo8(1)
+ 418 0216 00F0      		brlo .L49
+ 419 0218 8230      		cpi r24,lo8(2)
+ 420 021a 01F0      		breq .L51
+ 421 021c 8330      		cpi r24,lo8(3)
+ 422 021e 01F0      		breq .L52
+ 423 0220 80E0      		ldi r24,lo8(0)
+ 424               	.LVL37:
+ 425 0222 0895      		ret
+ 426               	.LVL38:
+ 427               	.L49:
+ 428               	.LM27:
+ 429 0224 89B3      		in r24,57-32
+ 430               	.LVL39:
+ 431 0226 00C0      		rjmp .L55
+ 432               	.LVL40:
+ 433               	.L50:
+ 434               	.LM28:
+ 435 0228 86B3      		in r24,54-32
+ 436               	.LVL41:
+ 437 022a 00C0      		rjmp .L55
+ 438               	.LVL42:
+ 439               	.L51:
+ 440               	.LM29:
+ 441 022c 83B3      		in r24,51-32
+ 442               	.LVL43:
+ 443               	.L55:
+ 444 022e 90E0      		ldi r25,lo8(0)
+ 445 0230 00C0      		rjmp 2f
+ 446 0232 9595      	1:	asr r25
+ 447 0234 8795      		ror r24
+ 448 0236 6A95      	2:	dec r22
+ 449 0238 02F4      		brpl 1b
+ 450 023a 8170      		andi r24,lo8(1)
+ 451               	.LVL44:
+ 452 023c 0895      		ret
+ 453               	.LVL45:
+ 454               	.L52:
+ 455               	.LM30:
+ 456 023e 80B3      		in r24,48-32
+ 457               	.LVL46:
+ 458 0240 90E0      		ldi r25,lo8(0)
+ 459 0242 00C0      		rjmp 2f
+ 460 0244 9595      	1:	asr r25
+ 461 0246 8795      		ror r24
+ 462 0248 6A95      	2:	dec r22
+ 463 024a 02F4      		brpl 1b
+ 464 024c 8170      		andi r24,lo8(1)
+ 465               	.LVL47:
+ 466               	.LVL48:
+ 467               	.LM31:
+ 468 024e 0895      		ret
+ 469               	.LFE6:
+ 471               	.global	DIO_voidActivePullUp
+ 473               	DIO_voidActivePullUp:
+ 474               	.LFB7:
+ 475               	.LM32:
+ 476               	.LVL49:
+ 477               	/* prologue: function */
+ 478               	/* frame size = 0 */
+ 479               	.LM33:
+ 480 0250 8130      		cpi r24,lo8(1)
+ 481 0252 01F0      		breq .L59
+ 482 0254 8130      		cpi r24,lo8(1)
+ 483 0256 00F0      		brlo .L58
+ 484 0258 8230      		cpi r24,lo8(2)
+ 485 025a 01F0      		breq .L60
+ 486 025c 8330      		cpi r24,lo8(3)
+ 487 025e 01F0      		breq .+2
+ 488 0260 00C0      		rjmp .L62
+ 489 0262 00C0      		rjmp .L63
+ 490               	.L58:
+ 491               	.LM34:
+ 492 0264 3AB3      		in r19,58-32
+ 493 0266 81E0      		ldi r24,lo8(1)
+ 494 0268 90E0      		ldi r25,hi8(1)
+ 495               	.LVL50:
+ 496 026a 00C0      		rjmp 2f
+ 497 026c 880F      	1:	lsl r24
+ 498 026e 991F      		rol r25
+ 499 0270 6A95      	2:	dec r22
+ 500 0272 02F4      		brpl 1b
+ 501 0274 282F      		mov r18,r24
+ 502 0276 2095      		com r18
+ 503 0278 2323      		and r18,r19
+ 504 027a 2ABB      		out 58-32,r18
+ 505               	.LM35:
+ 506 027c 2BB3      		in r18,59-32
+ 507 027e 822B      		or r24,r18
+ 508 0280 8BBB      		out 59-32,r24
+ 509 0282 0895      		ret
+ 510               	.LVL51:
+ 511               	.L59:
+ 512               	.LM36:
+ 513 0284 37B3      		in r19,55-32
+ 514 0286 81E0      		ldi r24,lo8(1)
+ 515 0288 90E0      		ldi r25,hi8(1)
+ 516               	.LVL52:
+ 517 028a 00C0      		rjmp 2f
+ 518 028c 880F      	1:	lsl r24
+ 519 028e 991F      		rol r25
+ 520 0290 6A95      	2:	dec r22
+ 521 0292 02F4      		brpl 1b
+ 522 0294 282F      		mov r18,r24
+ 523 0296 2095      		com r18
+ 524 0298 2323      		and r18,r19
+ 525 029a 27BB      		out 55-32,r18
+ 526               	.LM37:
+ 527 029c 28B3      		in r18,56-32
+ 528 029e 822B      		or r24,r18
+ 529 02a0 88BB      		out 56-32,r24
+ 530 02a2 0895      		ret
+ 531               	.LVL53:
+ 532               	.L60:
+ 533               	.LM38:
+ 534 02a4 34B3      		in r19,52-32
+ 535 02a6 81E0      		ldi r24,lo8(1)
+ 536 02a8 90E0      		ldi r25,hi8(1)
+ 537               	.LVL54:
+ 538 02aa 00C0      		rjmp 2f
+ 539 02ac 880F      	1:	lsl r24
+ 540 02ae 991F      		rol r25
+ 541 02b0 6A95      	2:	dec r22
+ 542 02b2 02F4      		brpl 1b
+ 543 02b4 282F      		mov r18,r24
+ 544 02b6 2095      		com r18
+ 545 02b8 2323      		and r18,r19
+ 546 02ba 24BB      		out 52-32,r18
+ 547               	.LM39:
+ 548 02bc 25B3      		in r18,53-32
+ 549 02be 822B      		or r24,r18
+ 550 02c0 85BB      		out 53-32,r24
+ 551 02c2 0895      		ret
+ 552               	.LVL55:
+ 553               	.L63:
+ 554               	.LM40:
+ 555 02c4 31B3      		in r19,49-32
+ 556 02c6 81E0      		ldi r24,lo8(1)
+ 557 02c8 90E0      		ldi r25,hi8(1)
+ 558               	.LVL56:
+ 559 02ca 00C0      		rjmp 2f
+ 560 02cc 880F      	1:	lsl r24
+ 561 02ce 991F      		rol r25
+ 562 02d0 6A95      	2:	dec r22
+ 563 02d2 02F4      		brpl 1b
+ 564 02d4 282F      		mov r18,r24
+ 565 02d6 2095      		com r18
+ 566 02d8 2323      		and r18,r19
+ 567 02da 21BB      		out 49-32,r18
+ 568               	.LM41:
+ 569 02dc 22B3      		in r18,50-32
+ 570 02de 822B      		or r24,r18
+ 571 02e0 82BB      		out 50-32,r24
+ 572               	.LVL57:
+ 573               	.L62:
+ 574 02e2 0895      		ret
+ 575               	.LFE7:
+ 577               	.global	DIO_voidTogglePin
+ 579               	DIO_voidTogglePin:
+ 580               	.LFB8:
+ 581               	.LM42:
+ 582               	.LVL58:
+ 583               	/* prologue: function */
+ 584               	/* frame size = 0 */
+ 585               	.LM43:
+ 586 02e4 8130      		cpi r24,lo8(1)
+ 587 02e6 01F0      		breq .L67
+ 588 02e8 8130      		cpi r24,lo8(1)
+ 589 02ea 00F0      		brlo .L66
+ 590 02ec 8230      		cpi r24,lo8(2)
+ 591 02ee 01F0      		breq .L68
+ 592 02f0 8330      		cpi r24,lo8(3)
+ 593 02f2 01F4      		brne .L70
+ 594 02f4 00C0      		rjmp .L71
+ 595               	.L66:
+ 596               	.LM44:
+ 597 02f6 2BB3      		in r18,59-32
+ 598 02f8 81E0      		ldi r24,lo8(1)
+ 599 02fa 90E0      		ldi r25,hi8(1)
+ 600               	.LVL59:
+ 601 02fc 00C0      		rjmp 2f
+ 602 02fe 880F      	1:	lsl r24
+ 603 0300 991F      		rol r25
+ 604 0302 6A95      	2:	dec r22
+ 605 0304 02F4      		brpl 1b
+ 606 0306 2827      		eor r18,r24
+ 607 0308 2BBB      		out 59-32,r18
+ 608 030a 0895      		ret
+ 609               	.LVL60:
+ 610               	.L67:
+ 611               	.LM45:
+ 612 030c 28B3      		in r18,56-32
+ 613 030e 81E0      		ldi r24,lo8(1)
+ 614 0310 90E0      		ldi r25,hi8(1)
+ 615               	.LVL61:
+ 616 0312 00C0      		rjmp 2f
+ 617 0314 880F      	1:	lsl r24
+ 618 0316 991F      		rol r25
+ 619 0318 6A95      	2:	dec r22
+ 620 031a 02F4      		brpl 1b
+ 621 031c 2827      		eor r18,r24
+ 622 031e 28BB      		out 56-32,r18
+ 623 0320 0895      		ret
+ 624               	.LVL62:
+ 625               	.L68:
+ 626               	.LM46:
+ 627 0322 25B3      		in r18,53-32
+ 628 0324 81E0      		ldi r24,lo8(1)
+ 629 0326 90E0      		ldi r25,hi8(1)
+ 630               	.LVL63:
+ 631 0328 00C0      		rjmp 2f
+ 632 032a 880F      	1:	lsl r24
+ 633 032c 991F      		rol r25
+ 634 032e 6A95      	2:	dec r22
+ 635 0330 02F4      		brpl 1b
+ 636 0332 2827      		eor r18,r24
+ 637 0334 25BB      		out 53-32,r18
+ 638 0336 0895      		ret
+ 639               	.LVL64:
+ 640               	.L71:
+ 641               	.LM47:
+ 642 0338 22B3      		in r18,50-32
+ 643 033a 81E0      		ldi r24,lo8(1)
+ 644 033c 90E0      		ldi r25,hi8(1)
+ 645               	.LVL65:
+ 646 033e 00C0      		rjmp 2f
+ 647 0340 880F      	1:	lsl r24
+ 648 0342 991F      		rol r25
+ 649 0344 6A95      	2:	dec r22
+ 650 0346 02F4      		brpl 1b
+ 651 0348 2827      		eor r18,r24
+ 652 034a 22BB      		out 50-32,r18
+ 653               	.LVL66:
+ 654               	.L70:
+ 655 034c 0895      		ret
+ 656               	.LFE8:
+ 730               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 DIO.c
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:2      *ABS*:0000003f __SREG__
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:5      *ABS*:00000034 __CCP__
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:18     .text:00000000 DIO_voidSetPortDirection
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:55     .text:00000022 DIO_voidSetPinDirection
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:213    .text:00000108 DIO_voidSetPortValue
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:250    .text:0000012a DIO_voidSetPinValue
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:408    .text:00000210 DIO_u8ReadPinValue
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:473    .text:00000250 DIO_voidActivePullUp
+C:\Users\Upgrade\AppData\Local\Temp/ccjlegmZ.s:579    .text:000002e4 DIO_voidTogglePin
+
+NO UNDEFINED SYMBOLS

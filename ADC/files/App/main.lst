@@ -1,0 +1,319 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	LedFun
+  18               	LedFun:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 0F93      		push r16
+  23 0002 1F93      		push r17
+  24               	/* prologue: function */
+  25               	/* frame size = 0 */
+  26 0004 082F      		mov r16,r24
+  27               	.LM2:
+  28 0006 83E0      		ldi r24,lo8(3)
+  29               	.LVL1:
+  30 0008 60E0      		ldi r22,lo8(0)
+  31 000a 0E94 0000 		call DIO_voidSetPortValue
+  32 000e 10E0      		ldi r17,lo8(0)
+  33               	.LVL2:
+  34 0010 00C0      		rjmp .L2
+  35               	.L3:
+  36               	.LBB2:
+  37               	.LM3:
+  38 0012 83E0      		ldi r24,lo8(3)
+  39 0014 612F      		mov r22,r17
+  40 0016 41E0      		ldi r20,lo8(1)
+  41 0018 0E94 0000 		call DIO_voidSetPinValue
+  42               	.LM4:
+  43 001c 1F5F      		subi r17,lo8(-(1))
+  44               	.L2:
+  45 001e 1017      		cp r17,r16
+  46 0020 00F0      		brlo .L3
+  47               	/* epilogue start */
+  48               	.LBE2:
+  49               	.LM5:
+  50 0022 1F91      		pop r17
+  51               	.LVL3:
+  52 0024 0F91      		pop r16
+  53               	.LVL4:
+  54 0026 0895      		ret
+  55               	.LFE2:
+  57               		.data
+  58               	.LC0:
+  59 0000 5465 6D70 		.string	"Temprature="
+  59      7261 7475 
+  59      7265 3D00 
+  60               	.LC1:
+  61 000c 2043 2020 		.string	" C      "
+  61      2020 2020 
+  61      00
+  62               	.LC2:
+  63 0015 566F 6C61 		.string	"Volatage="
+  63      7461 6765 
+  63      3D00 
+  64               	.LC3:
+  65 001f 2E00      		.string	"."
+  66               	.LC4:
+  67 0021 2056 2020 		.string	" V     "
+  67      2020 2000 
+  68               		.text
+  69               	.global	main
+  71               	main:
+  72               	.LFB3:
+  73               	.LM6:
+  74 0028 CF92      		push r12
+  75 002a DF92      		push r13
+  76 002c EF92      		push r14
+  77 002e FF92      		push r15
+  78 0030 0F93      		push r16
+  79 0032 1F93      		push r17
+  80               	/* prologue: function */
+  81               	/* frame size = 0 */
+  82               	.LM7:
+  83 0034 83E0      		ldi r24,lo8(3)
+  84 0036 6FEF      		ldi r22,lo8(-1)
+  85 0038 0E94 0000 		call DIO_voidSetPortDirection
+  86               	.LM8:
+  87 003c 82E0      		ldi r24,lo8(2)
+  88 003e 67E0      		ldi r22,lo8(7)
+  89 0040 41E0      		ldi r20,lo8(1)
+  90 0042 0E94 0000 		call DIO_voidSetPinDirection
+  91               	.LM9:
+  92 0046 82E0      		ldi r24,lo8(2)
+  93 0048 66E0      		ldi r22,lo8(6)
+  94 004a 41E0      		ldi r20,lo8(1)
+  95 004c 0E94 0000 		call DIO_voidSetPinDirection
+  96               	.LM10:
+  97 0050 0E94 0000 		call ADC_voidInit
+  98               	.LM11:
+  99 0054 0E94 0000 		call ADC_voidEnable
+ 100               	.LM12:
+ 101 0058 0E94 0000 		call LCD_voidInit
+ 102               	.LVL5:
+ 103               	.L10:
+ 104               	.LBB3:
+ 105               	.LM13:
+ 106 005c 81E0      		ldi r24,lo8(1)
+ 107 005e 61E0      		ldi r22,lo8(1)
+ 108 0060 0E94 0000 		call LCD_voidMoveCursor
+ 109               	.LM14:
+ 110 0064 80E0      		ldi r24,lo8(0)
+ 111 0066 0E94 0000 		call ADC_u16GetValue
+ 112 006a A0E0      		ldi r26,lo8(0)
+ 113 006c B0E0      		ldi r27,hi8(0)
+ 114 006e BC01      		movw r22,r24
+ 115 0070 CD01      		movw r24,r26
+ 116 0072 0E94 0000 		call __floatunsisf
+ 117 0076 20E0      		ldi r18,lo8(0x40a00000)
+ 118 0078 30E0      		ldi r19,hi8(0x40a00000)
+ 119 007a 40EA      		ldi r20,hlo8(0x40a00000)
+ 120 007c 50E4      		ldi r21,hhi8(0x40a00000)
+ 121 007e 0E94 0000 		call __mulsf3
+ 122 0082 20E0      		ldi r18,lo8(0x42c80000)
+ 123 0084 30E0      		ldi r19,hi8(0x42c80000)
+ 124 0086 48EC      		ldi r20,hlo8(0x42c80000)
+ 125 0088 52E4      		ldi r21,hhi8(0x42c80000)
+ 126 008a 0E94 0000 		call __mulsf3
+ 127 008e 20E0      		ldi r18,lo8(0x447fc000)
+ 128 0090 30EC      		ldi r19,hi8(0x447fc000)
+ 129 0092 4FE7      		ldi r20,hlo8(0x447fc000)
+ 130 0094 54E4      		ldi r21,hhi8(0x447fc000)
+ 131 0096 0E94 0000 		call __divsf3
+ 132 009a 0E94 0000 		call __fixunssfsi
+ 133 009e 7B01      		movw r14,r22
+ 134 00a0 8C01      		movw r16,r24
+ 135               	.LVL6:
+ 136               	.LM15:
+ 137 00a2 80E0      		ldi r24,lo8(.LC0)
+ 138 00a4 90E0      		ldi r25,hi8(.LC0)
+ 139 00a6 0E94 0000 		call LCD_voidWriteString
+ 140               	.LM16:
+ 141 00aa 9701      		movw r18,r14
+ 142 00ac 40E0      		ldi r20,lo8(0)
+ 143 00ae 50E0      		ldi r21,lo8(0)
+ 144 00b0 60E0      		ldi r22,lo8(0)
+ 145 00b2 70E0      		ldi r23,lo8(0)
+ 146 00b4 80E0      		ldi r24,lo8(0)
+ 147 00b6 90E0      		ldi r25,lo8(0)
+ 148 00b8 0E94 0000 		call LCD_voidWriteInteger
+ 149               	.LM17:
+ 150 00bc 80E0      		ldi r24,lo8(.LC1)
+ 151 00be 90E0      		ldi r25,hi8(.LC1)
+ 152 00c0 0E94 0000 		call LCD_voidWriteString
+ 153               	.LM18:
+ 154 00c4 89E2      		ldi r24,lo8(41)
+ 155 00c6 E816      		cp r14,r24
+ 156 00c8 F104      		cpc r15,__zero_reg__
+ 157               	.LVL7:
+ 158 00ca 00F0      		brlo .L6
+ 159               	.LM19:
+ 160 00cc 82E0      		ldi r24,lo8(2)
+ 161 00ce 67E0      		ldi r22,lo8(7)
+ 162 00d0 41E0      		ldi r20,lo8(1)
+ 163 00d2 00C0      		rjmp .L12
+ 164               	.L6:
+ 165               	.LM20:
+ 166 00d4 82E0      		ldi r24,lo8(2)
+ 167 00d6 67E0      		ldi r22,lo8(7)
+ 168 00d8 40E0      		ldi r20,lo8(0)
+ 169               	.L12:
+ 170 00da 0E94 0000 		call DIO_voidSetPinValue
+ 171               	.LM21:
+ 172 00de 81E0      		ldi r24,lo8(1)
+ 173 00e0 0E94 0000 		call ADC_u16GetValue
+ 174 00e4 A0E0      		ldi r26,lo8(0)
+ 175 00e6 B0E0      		ldi r27,hi8(0)
+ 176 00e8 BC01      		movw r22,r24
+ 177 00ea CD01      		movw r24,r26
+ 178 00ec 0E94 0000 		call __floatunsisf
+ 179 00f0 20E0      		ldi r18,lo8(0x43fa0000)
+ 180 00f2 30E0      		ldi r19,hi8(0x43fa0000)
+ 181 00f4 4AEF      		ldi r20,hlo8(0x43fa0000)
+ 182 00f6 53E4      		ldi r21,hhi8(0x43fa0000)
+ 183 00f8 0E94 0000 		call __mulsf3
+ 184 00fc 20E0      		ldi r18,lo8(0x447fc000)
+ 185 00fe 30EC      		ldi r19,hi8(0x447fc000)
+ 186 0100 4FE7      		ldi r20,hlo8(0x447fc000)
+ 187 0102 54E4      		ldi r21,hhi8(0x447fc000)
+ 188 0104 0E94 0000 		call __divsf3
+ 189 0108 0E94 0000 		call __fixunssfsi
+ 190 010c 7B01      		movw r14,r22
+ 191 010e 8C01      		movw r16,r24
+ 192               	.LVL8:
+ 193               	.LM22:
+ 194 0110 82E0      		ldi r24,lo8(2)
+ 195 0112 61E0      		ldi r22,lo8(1)
+ 196 0114 0E94 0000 		call LCD_voidMoveCursor
+ 197               	.LM23:
+ 198 0118 80E0      		ldi r24,lo8(.LC2)
+ 199 011a 90E0      		ldi r25,hi8(.LC2)
+ 200 011c 0E94 0000 		call LCD_voidWriteString
+ 201               	.LM24:
+ 202 0120 C701      		movw r24,r14
+ 203 0122 64E6      		ldi r22,lo8(100)
+ 204 0124 70E0      		ldi r23,hi8(100)
+ 205 0126 0E94 0000 		call __udivmodhi4
+ 206 012a 9B01      		movw r18,r22
+ 207 012c 40E0      		ldi r20,lo8(0)
+ 208 012e 50E0      		ldi r21,lo8(0)
+ 209 0130 60E0      		ldi r22,lo8(0)
+ 210 0132 70E0      		ldi r23,lo8(0)
+ 211 0134 80E0      		ldi r24,lo8(0)
+ 212 0136 90E0      		ldi r25,lo8(0)
+ 213 0138 0E94 0000 		call LCD_voidWriteInteger
+ 214               	.LM25:
+ 215 013c 80E0      		ldi r24,lo8(.LC3)
+ 216 013e 90E0      		ldi r25,hi8(.LC3)
+ 217 0140 0E94 0000 		call LCD_voidWriteString
+ 218               	.LM26:
+ 219 0144 C701      		movw r24,r14
+ 220 0146 64E6      		ldi r22,lo8(100)
+ 221 0148 70E0      		ldi r23,hi8(100)
+ 222 014a 0E94 0000 		call __udivmodhi4
+ 223 014e 9C01      		movw r18,r24
+ 224 0150 40E0      		ldi r20,lo8(0)
+ 225 0152 50E0      		ldi r21,lo8(0)
+ 226 0154 60E0      		ldi r22,lo8(0)
+ 227 0156 70E0      		ldi r23,lo8(0)
+ 228 0158 80E0      		ldi r24,lo8(0)
+ 229 015a 90E0      		ldi r25,lo8(0)
+ 230 015c 0E94 0000 		call LCD_voidWriteInteger
+ 231               	.LM27:
+ 232 0160 80E0      		ldi r24,lo8(.LC4)
+ 233 0162 90E0      		ldi r25,hi8(.LC4)
+ 234 0164 0E94 0000 		call LCD_voidWriteString
+ 235               	.LM28:
+ 236 0168 8BEF      		ldi r24,lo8(251)
+ 237 016a E816      		cp r14,r24
+ 238 016c F104      		cpc r15,__zero_reg__
+ 239               	.LVL9:
+ 240 016e 00F0      		brlo .L8
+ 241               	.LM29:
+ 242 0170 82E0      		ldi r24,lo8(2)
+ 243 0172 66E0      		ldi r22,lo8(6)
+ 244 0174 41E0      		ldi r20,lo8(1)
+ 245 0176 00C0      		rjmp .L13
+ 246               	.L8:
+ 247               	.LM30:
+ 248 0178 82E0      		ldi r24,lo8(2)
+ 249 017a 66E0      		ldi r22,lo8(6)
+ 250 017c 40E0      		ldi r20,lo8(0)
+ 251               	.L13:
+ 252 017e 0E94 0000 		call DIO_voidSetPinValue
+ 253               	.LM31:
+ 254 0182 82E0      		ldi r24,lo8(2)
+ 255 0184 0E94 0000 		call ADC_u16GetValue
+ 256               	.LM32:
+ 257 0188 A0E0      		ldi r26,lo8(0)
+ 258 018a B0E0      		ldi r27,hi8(0)
+ 259 018c BC01      		movw r22,r24
+ 260 018e CD01      		movw r24,r26
+ 261 0190 0E94 0000 		call __floatunsisf
+ 262 0194 20E0      		ldi r18,lo8(0x43fa0000)
+ 263 0196 30E0      		ldi r19,hi8(0x43fa0000)
+ 264 0198 4AEF      		ldi r20,hlo8(0x43fa0000)
+ 265 019a 53E4      		ldi r21,hhi8(0x43fa0000)
+ 266 019c 0E94 0000 		call __mulsf3
+ 267 01a0 20E0      		ldi r18,lo8(0x447fc000)
+ 268 01a2 30EC      		ldi r19,hi8(0x447fc000)
+ 269 01a4 4FE7      		ldi r20,hlo8(0x447fc000)
+ 270 01a6 54E4      		ldi r21,hhi8(0x447fc000)
+ 271 01a8 0E94 0000 		call __divsf3
+ 272 01ac 0E94 0000 		call __fixunssfsi
+ 273 01b0 80E0      		ldi r24,lo8(0)
+ 274 01b2 90E0      		ldi r25,hi8(0)
+ 275 01b4 0E94 0000 		call __floatunsisf
+ 276 01b8 20E0      		ldi r18,lo8(0x41000000)
+ 277 01ba 30E0      		ldi r19,hi8(0x41000000)
+ 278 01bc 40E0      		ldi r20,hlo8(0x41000000)
+ 279 01be 51E4      		ldi r21,hhi8(0x41000000)
+ 280 01c0 0E94 0000 		call __mulsf3
+ 281 01c4 20E0      		ldi r18,lo8(0x43fa0000)
+ 282 01c6 30E0      		ldi r19,hi8(0x43fa0000)
+ 283 01c8 4AEF      		ldi r20,hlo8(0x43fa0000)
+ 284 01ca 53E4      		ldi r21,hhi8(0x43fa0000)
+ 285 01cc 0E94 0000 		call __divsf3
+ 286 01d0 0E94 0000 		call __fixunssfsi
+ 287 01d4 DC01      		movw r26,r24
+ 288 01d6 CB01      		movw r24,r22
+ 289 01d8 0E94 0000 		call LedFun
+ 290 01dc 00C0      		rjmp .L10
+ 291               	.LBE3:
+ 292               	.LFE3:
+ 326               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Upgrade\AppData\Local\Temp/ccgGdjr5.s:2      *ABS*:0000003f __SREG__
+C:\Users\Upgrade\AppData\Local\Temp/ccgGdjr5.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Upgrade\AppData\Local\Temp/ccgGdjr5.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Upgrade\AppData\Local\Temp/ccgGdjr5.s:5      *ABS*:00000034 __CCP__
+C:\Users\Upgrade\AppData\Local\Temp/ccgGdjr5.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Upgrade\AppData\Local\Temp/ccgGdjr5.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Upgrade\AppData\Local\Temp/ccgGdjr5.s:18     .text:00000000 LedFun
+C:\Users\Upgrade\AppData\Local\Temp/ccgGdjr5.s:71     .text:00000028 main
+
+UNDEFINED SYMBOLS
+DIO_voidSetPortValue
+DIO_voidSetPinValue
+DIO_voidSetPortDirection
+DIO_voidSetPinDirection
+ADC_voidInit
+ADC_voidEnable
+LCD_voidInit
+LCD_voidMoveCursor
+ADC_u16GetValue
+__floatunsisf
+__mulsf3
+__divsf3
+__fixunssfsi
+LCD_voidWriteString
+LCD_voidWriteInteger
+__udivmodhi4
+__do_copy_data
